@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aesop × MINI Cooper — The Beautiful Path</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-deep: #1a1612;
+    --bg-warm: #211c17;
+    --bg-cream: #ece5d8;
+    --bg-cream-soft: #e3dac8;
+    --ink: #f3ead8;
+    --ink-soft: #b6a98f;
+    --ink-deep: #2b241c;
+    --olive: #8a7d56;
+    --bronze: #b58c4d;
+    --line: rgba(243, 234, 216, 0.18);
+    --line-dark: rgba(43, 36, 28, 0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg-deep); color: var(--ink); font-family: "Noto Serif TC", "Cormorant Garamond", serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--bronze); color: var(--bg-deep); }
+
+  /* ======== NAV ======== */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 40px; mix-blend-mode: difference;
+    color: #f3ead8;
+  }
+  .nav .brand { font-family: "Cormorant Garamond", serif; font-size: 22px; letter-spacing: 0.08em; }
+  .nav .brand span { opacity: 0.6; margin: 0 10px; }
+  .nav .links { display: flex; gap: 32px; font-family: "Inter", sans-serif; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .nav .links a { opacity: 0.85; transition: opacity .3s; }
+  .nav .links a:hover { opacity: 1; }
+  .nav .menu-icon { width: 22px; height: 14px; position: relative; cursor: pointer; }
+  .nav .menu-icon::before, .nav .menu-icon::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: currentColor; }
+  .nav .menu-icon::before { top: 0; }
+  .nav .menu-icon::after { bottom: 0; }
+
+  /* ======== HERO ======== */
+  .hero {
+    position: relative; height: 100vh; min-height: 720px; overflow: hidden;
+    display: flex; align-items: center; justify-content: flex-start;
+    color: var(--ink);
+  }
+  .hero video, .hero .hero-fallback {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(15,12,9,0.55) 0%, rgba(15,12,9,0.25) 35%, rgba(15,12,9,0.85) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2; padding: 0 80px; max-width: 880px;
+  }
+  .hero h1 {
+    font-family: "Cormorant Garamond", serif; font-weight: 300;
+    font-size: clamp(64px, 8vw, 124px); line-height: 0.95; letter-spacing: -0.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--bronze); }
+  .hero .quote {
+    margin-top: 28px; max-width: 460px;
+    font-family: "Cormorant Garamond", serif; font-style: italic;
+    font-size: 18px; line-height: 1.6; opacity: 0.9;
+  }
+  .hero .quote small { display: block; margin-top: 10px; font-style: normal; letter-spacing: 0.2em; font-size: 11px; opacity: 0.7; }
+  .hero .scroll-cue {
+    position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%);
+    z-index: 2; font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.7;
+  }
+  .hero .scroll-cue::after { content: ""; display: block; width: 1px; height: 36px; background: currentColor; margin: 12px auto 0; opacity: 0.6; }
+  .hero .vrt-text {
+    position: absolute; right: 24px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl;
+    z-index: 2; font-family: "Inter", sans-serif; font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; opacity: 0.7;
+  }
+
+  /* ======== SECTION FRAME ======== */
+  section { padding: 120px 80px; }
+  .eyebrow {
+    font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--bronze); margin-bottom: 18px;
+  }
+  h2.section-title {
+    font-family: "Cormorant Garamond", serif; font-weight: 300;
+    font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.005em;
+  }
+  .lede { max-width: 540px; font-size: 15px; line-height: 1.85; color: var(--ink-soft); margin-top: 22px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 14px 26px; border: 1px solid currentColor;
+    font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    background: transparent; color: inherit; cursor: pointer;
+    transition: background .35s, color .35s, border-color .35s;
+  }
+  .btn:hover { background: var(--bronze); color: var(--bg-deep); border-color: var(--bronze); }
+  .btn .arrow { display: inline-block; width: 22px; height: 1px; background: currentColor; position: relative; }
+  .btn .arrow::after { content: ""; position: absolute; right: 0; top: -3px; width: 8px; height: 8px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; transform: rotate(45deg); }
+
+  /* ======== FIVE SENSES ======== */
+  .senses {
+    background: var(--bg-cream); color: var(--ink-deep);
+  }
+  .senses .head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 60px; }
+  .senses .head .lede { color: rgba(43, 36, 28, 0.7); }
+  .senses .head .eyebrow { color: var(--olive); }
+  .sense-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+  }
+  .sense-card {
+    position: relative; aspect-ratio: 3/4; overflow: hidden;
+    background: var(--bg-warm); color: var(--ink); cursor: pointer;
+    border: none; padding: 0; text-align: left;
+  }
+  .sense-card .photo {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    transition: transform 1.4s cubic-bezier(.2,.7,.2,1), filter .6s;
+    filter: brightness(0.7);
+  }
+  .sense-card:hover .photo { transform: scale(1.08); filter: brightness(0.95); }
+  .sense-card .overlay {
+    position: absolute; inset: 0; padding: 22px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: linear-gradient(180deg, rgba(20,16,12,0.05) 0%, rgba(20,16,12,0.65) 100%);
+  }
+  .sense-card .num { font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.3em; opacity: 0.85; }
+  .sense-card .label-block { display: flex; flex-direction: column; gap: 4px; }
+  .sense-card .en { font-family: "Inter", sans-serif; font-size: 13px; letter-spacing: 0.34em; text-transform: uppercase; }
+  .sense-card .zh { font-family: "Cormorant Garamond","Noto Serif TC", serif; font-size: 28px; font-weight: 300; line-height: 1; }
+  .sense-card .desc {
+    margin-top: 8px; font-size: 12px; line-height: 1.6; color: rgba(243,234,216,0.85);
+    max-height: 0; opacity: 0; transition: max-height .5s, opacity .4s, margin-top .4s;
+    overflow: hidden;
+  }
+  .sense-card:hover .desc, .sense-card:focus-visible .desc { max-height: 100px; opacity: 1; margin-top: 12px; }
+
+  /* sense detail panel */
+  .sense-detail {
+    margin-top: 60px; background: #fff; padding: 40px 48px;
+    display: grid; grid-template-columns: 220px 1fr auto; gap: 48px; align-items: center;
+    border: 1px solid var(--line-dark);
+  }
+  .sense-detail .pill { font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--olive); }
+  .sense-detail h3 { font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: 36px; margin-top: 6px; }
+  .sense-detail p { color: rgba(43,36,28,0.75); font-size: 15px; line-height: 1.85; }
+  .sense-detail .product { font-family: "Inter", sans-serif; font-size: 12px; letter-spacing: 0.18em; color: var(--olive); text-transform: uppercase; }
+
+  /* ======== INTERIOR RITUAL ======== */
+  .interior { background: var(--bg-warm); }
+  .interior .head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 60px; }
+  .interior-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 14px; height: 460px; }
+  .interior-grid .tile { position: relative; overflow: hidden; }
+  .interior-grid .tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+  .interior-grid .tile:hover img { transform: scale(1.06); }
+  .interior-grid .tile .cap {
+    position: absolute; left: 18px; bottom: 16px;
+    font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink); opacity: 0.85;
+    background: rgba(20,16,12,0.45); padding: 6px 10px;
+  }
+
+  /* ======== STORE TO STREET ======== */
+  .street { background: var(--bg-cream); color: var(--ink-deep); }
+  .street .head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 60px; }
+  .street .head .eyebrow { color: var(--olive); }
+  .street .head .lede { color: rgba(43,36,28,0.7); }
+  .street-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .street-grid .panel { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #000; }
+  .street-grid .panel img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+  .street-grid .panel:hover img { transform: scale(1.04); }
+  .street-grid .panel .tag {
+    position: absolute; left: 22px; top: 22px;
+    font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink);
+    background: rgba(20,16,12,0.55); padding: 6px 12px;
+  }
+  .street-grid .panel .ttl {
+    position: absolute; left: 24px; bottom: 22px; right: 24px;
+    color: var(--ink); font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 300;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+  }
+
+  /* ======== SUSTAINABLE ======== */
+  .sustain { background: var(--bg-deep); }
+  .sustain .head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 60px; }
+  .icons-row { display: grid; grid-template-columns: repeat(4, 1fr) 1.2fr; gap: 24px; align-items: center; }
+  .icon-tile { display: flex; flex-direction: column; gap: 14px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .icon-tile svg { width: 38px; height: 38px; stroke: var(--bronze); fill: none; stroke-width: 1.2; }
+  .icon-tile .ttl { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 400; }
+  .icon-tile .sub { font-family: "Inter", sans-serif; font-size: 12px; letter-spacing: 0.06em; line-height: 1.6; color: var(--ink-soft); }
+  .icons-row .photo-tile { aspect-ratio: 4/5; overflow: hidden; }
+  .icons-row .photo-tile img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ======== JOIN / BOOKING ======== */
+  .join {
+    position: relative; padding: 0; min-height: 760px;
+    display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-warm);
+  }
+  .join .left {
+    position: relative; overflow: hidden; min-height: 760px;
+  }
+  .join .left img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .join .left::after { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,12,9,0.5), rgba(15,12,9,0.05)); }
+  .join .left .label {
+    position: absolute; left: 40px; top: 40px; z-index: 2;
+    font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink);
+  }
+  .join .right {
+    padding: 90px 80px; display: flex; flex-direction: column; justify-content: center; gap: 28px;
+  }
+  .join h2 { font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(40px, 4.5vw, 64px); line-height: 1.05; }
+  .join h2 em { font-style: italic; color: var(--bronze); }
+  .join p.lede { color: var(--ink-soft); max-width: 480px; }
+  .gift-box {
+    margin-top: 4px; padding: 22px 24px; border: 1px solid var(--line); display: flex; gap: 18px; align-items: center;
+    background: rgba(255,255,255,0.02);
+  }
+  .gift-box .gift-img { width: 92px; height: 92px; flex: none; overflow: hidden; }
+  .gift-box .gift-img img { width: 100%; height: 100%; object-fit: cover; }
+  .gift-box .gift-text .t { font-family: "Cormorant Garamond", serif; font-size: 22px; }
+  .gift-box .gift-text .s { font-family: "Inter", sans-serif; font-size: 12px; letter-spacing: 0.08em; color: var(--ink-soft); margin-top: 6px; line-height: 1.6; }
+
+  /* form */
+  form.book { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 22px; margin-top: 8px; }
+  form.book .field { display: flex; flex-direction: column; gap: 8px; }
+  form.book .field.full { grid-column: 1 / -1; }
+  form.book label { font-family: "Inter", sans-serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-soft); }
+  form.book input, form.book select, form.book textarea {
+    background: transparent; border: none; border-bottom: 1px solid var(--line);
+    color: var(--ink); padding: 10px 0; font-family: "Inter", sans-serif; font-size: 14px; outline: none;
+    transition: border-color .3s;
+  }
+  form.book input:focus, form.book select:focus, form.book textarea:focus { border-bottom-color: var(--bronze); }
+  form.book select option { background: var(--bg-warm); color: var(--ink); }
+  form.book .submit-row { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
+  form.book .submit-row .small { font-family: "Inter", sans-serif; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.05em; max-width: 320px; line-height: 1.5; }
+
+  /* booked confirm */
+  .confirm {
+    display: none; padding: 22px 24px; border: 1px solid var(--bronze); margin-top: 18px;
+    color: var(--ink); background: rgba(181,140,77,0.08);
+  }
+  .confirm.show { display: block; animation: fadeIn .6s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* ======== FOOTER ======== */
+  footer { background: var(--bg-deep); padding: 50px 80px 30px; border-top: 1px solid var(--line); }
+  .foot-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 26px; border-bottom: 1px solid var(--line); }
+  .foot-top .logos { font-family: "Cormorant Garamond", serif; font-size: 22px; letter-spacing: 0.08em; }
+  .foot-top .logos span { opacity: 0.5; margin: 0 10px; }
+  .foot-bot { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; }
+  .foot-bot .links { display: flex; gap: 28px; font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+  .foot-bot .copy { font-family: "Inter", sans-serif; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.05em; }
+
+  /* ======== Responsive ======== */
+  @media (max-width: 1100px) {
+    section { padding: 90px 40px; }
+    .nav { padding: 18px 24px; }
+    .hero-content { padding: 0 40px; }
+    .senses .head, .interior .head, .street .head, .sustain .head { grid-template-columns: 1fr; gap: 24px; }
+    .sense-grid { grid-template-columns: repeat(2, 1fr); }
+    .sense-detail { grid-template-columns: 1fr; gap: 18px; }
+    .interior-grid { grid-template-columns: 1fr 1fr; height: auto; grid-auto-rows: 240px; }
+    .street-grid { grid-template-columns: 1fr; }
+    .icons-row { grid-template-columns: 1fr 1fr; }
+    .icons-row .photo-tile { grid-column: 1 / -1; aspect-ratio: 16/9; }
+    .join { grid-template-columns: 1fr; }
+    .join .left { min-height: 360px; }
+    .join .right { padding: 60px 40px; }
+    form.book { grid-template-columns: 1fr; }
+    .foot-top, .foot-bot { flex-direction: column; gap: 14px; align-items: flex-start; }
+    .nav .links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="brand">Aesop. <span>×</span> MINI</div>
+  <div class="links">
+    <a href="#senses">The 5 Senses</a>
+    <a href="#interior">Interior Ritual</a>
+    <a href="#street">Store · Street</a>
+    <a href="#sustain">Sustainability</a>
+    <a href="#join">Book a Drive</a>
+  </div>
+  <div class="menu-icon" aria-label="menu"></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <video id="heroVideo" autoplay muted loop playsinline poster="assets/hero-reference.png">
+    <source src="assets/hero-video.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-content">
+    <h1>The Beautiful <em>Path.</em></h1>
+    <p class="quote">
+      "If the path is beautiful, let us not ask where it leads."
+      <small>— Anatole France ｜ Aesop × MINI Cooper</small>
+    </p>
+    <div style="margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;">
+      <a href="#senses" class="btn">啟程・The Five Senses <span class="arrow"></span></a>
+      <a href="#join" class="btn" style="background:rgba(255,255,255,0.06);">預約試駕 <span class="arrow"></span></a>
+    </div>
+  </div>
+  <div class="vrt-text">A Sensory Drive · Spring 2026</div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<!-- 5 SENSES -->
+<section class="senses" id="senses">
+  <div class="head">
+    <div>
+      <div class="eyebrow">A Journey Through the Five Senses</div>
+      <h2 class="section-title">一場以五感重新出發的城市旅程</h2>
+    </div>
+    <p class="lede">
+      目的地未必比過程重要。這場 Aesop × MINI Cooper 的合作，將品牌四十年來對嗅覺、肌膚與儀式感的理解，安放進 MINI 的駕駛座艙。請選擇一種感官開始——
+    </p>
+  </div>
+
+  <div class="sense-grid" id="senseGrid">
+    <button class="sense-card" data-sense="touch" aria-label="Touch 觸">
+      <div class="photo" style="background-image:url('assets/sense-touch.png')"></div>
+      <div class="overlay">
+        <div class="num">01</div>
+        <div>
+          <div class="label-block">
+            <div class="en">Touch</div>
+            <div class="zh">觸</div>
+          </div>
+          <div class="desc">真皮縫線、胡桃木飾板、Aesop Resurrection Hand Balm。</div>
+        </div>
+      </div>
+    </button>
+    <button class="sense-card" data-sense="sound" aria-label="Sound 聽">
+      <div class="photo" style="background-image:url('assets/sense-sound.png')"></div>
+      <div class="overlay">
+        <div class="num">02</div>
+        <div>
+          <div class="label-block">
+            <div class="en">Sound</div>
+            <div class="zh">聽</div>
+          </div>
+          <div class="desc">Harman Kardon 環繞 × Aesop 城市散步歌單。</div>
+        </div>
+      </div>
+    </button>
+    <button class="sense-card" data-sense="scent" aria-label="Scent 香">
+      <div class="photo" style="background-image:url('assets/sense-scent.png')"></div>
+      <div class="overlay">
+        <div class="num">03</div>
+        <div>
+          <div class="label-block">
+            <div class="en">Scent</div>
+            <div class="zh">香</div>
+          </div>
+          <div class="desc">特調車內香氛 Tacit for Drive — 葡萄柚、香根草、苔。</div>
+        </div>
+      </div>
+    </button>
+    <button class="sense-card" data-sense="taste" aria-label="Taste 品">
+      <div class="photo" style="background-image:url('assets/sense-taste.png')"></div>
+      <div class="overlay">
+        <div class="num">04</div>
+        <div>
+          <div class="label-block">
+            <div class="en">Taste</div>
+            <div class="zh">品</div>
+          </div>
+          <div class="desc">啟程前奉一杯焙茶——延續 Aesop 門店的奉茶儀式。</div>
+        </div>
+      </div>
+    </button>
+    <button class="sense-card" data-sense="sight" aria-label="Sight 觀">
+      <div class="photo" style="background-image:url('assets/sense-sight.png')"></div>
+      <div class="overlay">
+        <div class="num">05</div>
+        <div>
+          <div class="label-block">
+            <div class="en">Sight</div>
+            <div class="zh">觀</div>
+          </div>
+          <div class="desc">琥珀色內裝光、街景與夜景，重新定義一段路的色溫。</div>
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <div class="sense-detail" id="senseDetail">
+    <div>
+      <div class="pill" id="sd-pill">01 · Touch ｜ 觸</div>
+      <h3 id="sd-title">真皮、木質、與手心的溫度</h3>
+    </div>
+    <p id="sd-text">
+      MINI Cooper 的真皮座椅與核桃木飾板，與 Aesop 的 Resurrection Aromatique Hand Balm 共同形塑一段「先觸碰、再出發」的儀式。在點火之前，先讓掌心被柑橘與雪松的氣息喚醒。
+    </p>
+    <a href="#join" class="btn" style="color:var(--ink-deep);border-color:var(--ink-deep);">預約體驗 <span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- INTERIOR RITUAL -->
+<section class="interior" id="interior">
+  <div class="head">
+    <div>
+      <div class="eyebrow">The Interior Ritual</div>
+      <h2 class="section-title">車室之內，是最微型的 Aesop 門店</h2>
+    </div>
+    <p class="lede">
+      椅背的縫線、出風口邊緣、儀表台木紋——MINI 的內裝設計被重新閱讀為一座移動中的洗手台。我們在中央扶手內藏入精油袋，於空調系統釋放限定香氛 Tacit for Drive。
+    </p>
+  </div>
+
+  <div class="interior-grid">
+    <div class="tile"><img src="assets/interior-detail.png" alt="" /><span class="cap">音響細節 · Speaker Detail</span></div>
+    <div class="tile"><img src="assets/interior-seat.png" alt="" /><span class="cap">真皮坐感 · Leather</span></div>
+    <div class="tile"><img src="assets/interior-speaker.png" alt="" /><span class="cap">環繞音場 · Sound</span></div>
+    <div class="tile"><img src="assets/sense-taste.png" alt="" /><span class="cap">奉茶 · Tea Ritual</span></div>
+  </div>
+</section>
+
+<!-- STORE TO STREET -->
+<section class="street" id="street">
+  <div class="head">
+    <div>
+      <div class="eyebrow">From Store to Street</div>
+      <h2 class="section-title">從石牆與木櫃，到柏油路與晚風</h2>
+    </div>
+    <p class="lede">
+      Aesop 把建築當作品牌的一部分。我們把這份對「空間質地」的執著，延伸進入街道——MINI Cooper 是 Aesop 門店在城市中的另一個入口。
+    </p>
+  </div>
+
+  <div class="street-grid">
+    <div class="panel">
+      <img src="assets/store-counter.png" alt="Aesop Store" />
+      <span class="tag">Aesop · Store</span>
+      <div class="ttl">石材中島・植物・低飽和的光</div>
+    </div>
+    <div class="panel">
+      <img src="assets/street-vintage.png" alt="MINI on the street" />
+      <span class="tag">MINI · Street</span>
+      <div class="ttl">同一條街上，移動的另一個房間</div>
+    </div>
+    <div class="panel">
+      <img src="assets/store-shelf.png" alt="Aesop Shelf" />
+      <span class="tag">Aesop · Apothecary</span>
+      <div class="ttl">沉靜陳列，是配方也是節奏</div>
+    </div>
+    <div class="panel">
+      <img src="assets/street-night.png" alt="MINI at Night" />
+      <span class="tag">MINI · Night Drive</span>
+      <div class="ttl">夜晚十一點的街，是城市最安靜的香氣</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABLE -->
+<section class="sustain" id="sustain">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Sustainable by Design</div>
+      <h2 class="section-title">美感，不只在風格之中</h2>
+    </div>
+    <p class="lede">
+      Aesop 與 MINI Cooper 共同承諾：聯名包裝採用 100% 可回收紙材，車內香氛使用可重複填充瓶身，車輛體驗由 MINI Electric 提供，零當地排放。
+    </p>
+  </div>
+
+  <div class="icons-row">
+    <div class="icon-tile">
+      <svg viewBox="0 0 32 32"><path d="M6 22c4-10 16-10 20 0M16 6v6M11 9l5 3 5-3" /></svg>
+      <div class="ttl">Refillable</div>
+      <div class="sub">可重複填充<br>香氛・洗手乳</div>
+    </div>
+    <div class="icon-tile">
+      <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M10 16h12M16 10v12"/></svg>
+      <div class="ttl">100% Recyclable</div>
+      <div class="sub">100% 可回收<br>紙袋與包材</div>
+    </div>
+    <div class="icon-tile">
+      <svg viewBox="0 0 32 32"><path d="M6 26c0-8 6-14 14-14M20 12l-2-4M20 12h-4"/></svg>
+      <div class="ttl">Local Botanicals</div>
+      <div class="sub">在地植物<br>合作茶農與香農</div>
+    </div>
+    <div class="icon-tile">
+      <svg viewBox="0 0 32 32"><path d="M16 4l4 8h-3v6h-2v-6h-3zM6 20h20l-3 8H9z"/></svg>
+      <div class="ttl">Zero Local Emission</div>
+      <div class="sub">MINI Electric 動力<br>城市零排放</div>
+    </div>
+    <div class="photo-tile"><img src="assets/aesop-products.png" alt="Aesop Products" /></div>
+  </div>
+</section>
+
+<!-- JOIN / BOOKING -->
+<section class="join" id="join">
+  <div class="left">
+    <img src="assets/journey-sunset.png" alt="Beautiful Path" />
+    <div class="label">Join · The Beautiful Path</div>
+  </div>
+  <div class="right">
+    <div class="eyebrow" style="color:var(--bronze);">Book a Sensory Drive</div>
+    <h2>讓路途成為儀式 — <em>預約試駕</em></h2>
+    <p class="lede">
+      預約 MINI Cooper × Aesop 限定試駕體驗。每位來賓將在啟程前獲贈 Aesop 旅行香氛組與奉茶儀式，並可體驗車內限定香氛 Tacit for Drive。
+    </p>
+
+    <div class="gift-box">
+      <div class="gift-img"><img src="assets/aesop-bag.png" alt="Aesop Gift" /></div>
+      <div class="gift-text">
+        <div class="t">試駕禮 · The Beautiful Path Kit</div>
+        <div class="s">Resurrection Hand Balm 75ml<br>Tacit Eau de Toilette 旅行裝<br>限定棉麻提袋（每組限量 200）</div>
+      </div>
+    </div>
+
+    <form class="book" id="bookForm" onsubmit="return submitBooking(event)">
+      <div class="field">
+        <label for="fname">姓名 · Name</label>
+        <input id="fname" required placeholder="王 美麗" />
+      </div>
+      <div class="field">
+        <label for="phone">電話 · Phone</label>
+        <input id="phone" required placeholder="0912 345 678" />
+      </div>
+      <div class="field">
+        <label for="email">電子信箱 · Email</label>
+        <input id="email" type="email" required placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label for="city">城市 · City</label>
+        <select id="city" required>
+          <option value="">請選擇城市</option>
+          <option>台北 · 信義 Aesop</option>
+          <option>台北 · 富錦街 Aesop</option>
+          <option>台中 · 草悟道 Aesop</option>
+          <option>高雄 · 漢神巨蛋 Aesop</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="date">預約日期 · Date</label>
+        <input id="date" type="date" required />
+      </div>
+      <div class="field">
+        <label for="time">時段 · Time</label>
+        <select id="time" required>
+          <option value="">請選擇時段</option>
+          <option>10:00 — 11:00 晨間散步</option>
+          <option>14:00 — 15:00 午後城市</option>
+          <option>17:30 — 18:30 黃昏儀式</option>
+          <option>20:00 — 21:00 夜間香氣</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="sense">想優先體驗的感官 · Preferred Sense</label>
+        <select id="sense">
+          <option>Touch 觸 — 真皮與護手霜</option>
+          <option>Sound 聽 — 城市散步歌單</option>
+          <option>Scent 香 — Tacit for Drive</option>
+          <option>Taste 品 — 焙茶奉茶</option>
+          <option>Sight 觀 — 黃昏色溫</option>
+          <option>全部都想體驗</option>
+        </select>
+      </div>
+      <div class="submit-row">
+        <div class="small">送出後將寄送確認信至您的信箱，並由門店專員與您聯繫。Aesop 試駕禮將於到店時親手交付。</div>
+        <button type="submit" class="btn" style="border-color:var(--bronze); color:var(--bronze);">確認預約 <span class="arrow"></span></button>
+      </div>
+    </form>
+
+    <div class="confirm" id="confirm">
+      謝謝您 — 您的 The Beautiful Path 試駕已預約成功。<br>
+      確認信已寄至您填寫的信箱。願您的下一段路途，如同它所通往的地方一樣美。
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="logos">Aesop. <span>×</span> MINI Cooper</div>
+    <a href="#top" class="btn" style="border-color:var(--ink-soft); color:var(--ink-soft);">回到頂端 <span class="arrow"></span></a>
+  </div>
+  <div class="foot-bot">
+    <div class="links">
+      <a>The Five Senses</a>
+      <a>Store Experience</a>
+      <a>Sustainability</a>
+      <a>Collaboration</a>
+      <a>Press</a>
+    </div>
+    <div class="copy">© 2026 Aesop × MINI Cooper — A Sensory Collaboration. The Beautiful Path.</div>
+  </div>
+</footer>
+
+<script>
+  // ====== Hero video — half-speed playback (slower by 1x) ======
+  (function() {
+    const v = document.getElementById('heroVideo');
+    if (!v) return;
+    const setSlow = () => { try { v.playbackRate = 0.5; } catch(e) {} };
+    setSlow();
+    v.addEventListener('loadedmetadata', setSlow);
+    v.addEventListener('play', setSlow);
+    v.addEventListener('ratechange', () => { if (v.playbackRate !== 0.5) setSlow(); });
+  })();
+
+  // ====== Sense card switch detail ======
+  const data = {
+    touch: {
+      pill: "01 · Touch ｜ 觸",
+      title: "真皮、木質，與手心的溫度",
+      text: "MINI Cooper 的真皮座椅與核桃木飾板，與 Aesop 的 Resurrection Aromatique Hand Balm 共同形塑「先觸碰、再出發」的儀式。在點火之前，先讓掌心被柑橘與雪松的氣息喚醒。"
+    },
+    sound: {
+      pill: "02 · Sound ｜ 聽",
+      title: "城市散步的節奏",
+      text: "Harman Kardon 環繞音響搭配 Aesop 為這次合作策劃的 The Beautiful Path 歌單——爵士、Bossa Nova 與環境音，伴你穿過下午四點半的街角。"
+    },
+    scent: {
+      pill: "03 · Scent ｜ 香",
+      title: "Tacit for Drive — 為這條路調的香",
+      text: "以 Aesop Tacit 為基底，新增葡萄柚、香根草與苔的調香，可緩釋於空調出風口。一段路，是一段嗅覺的散文。"
+    },
+    taste: {
+      pill: "04 · Taste ｜ 品",
+      title: "啟程前的一杯焙茶",
+      text: "延續 Aesop 門店的奉茶儀式——出發前，由門店專員為您奉上一杯焙茶，與一塊在地小點。讓味覺先行於輪胎。"
+    },
+    sight: {
+      pill: "05 · Sight ｜ 觀",
+      title: "黃昏色溫，重新定義一段路",
+      text: "MINI 內裝的琥珀光與 Aesop 門店的暖色調共享一種色溫。在傍晚六點上路，你將意識到——所謂城市，是一個正在被柔光調整的房間。"
+    }
+  };
+  const cards = document.querySelectorAll('.sense-card');
+  const sdPill = document.getElementById('sd-pill');
+  const sdTitle = document.getElementById('sd-title');
+  const sdText = document.getElementById('sd-text');
+  cards.forEach(c => {
+    c.addEventListener('click', () => {
+      const k = c.dataset.sense;
+      const d = data[k];
+      sdPill.textContent = d.pill;
+      sdTitle.textContent = d.title;
+      sdText.textContent = d.text;
+      cards.forEach(x => x.style.outline = 'none');
+      c.style.outline = '2px solid var(--bronze)';
+      document.getElementById('senseDetail').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+  // ====== Smooth-scroll nav ======
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1 && document.querySelector(id)) {
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  // ====== Booking form ======
+  function submitBooking(e) {
+    e.preventDefault();
+    const c = document.getElementById('confirm');
+    c.classList.add('show');
+    document.getElementById('bookForm').reset();
+    setTimeout(()=> c.scrollIntoView({behavior:'smooth', block:'center'}), 200);
+    return false;
+  }
+</script>
+
+</body>
+</html>
